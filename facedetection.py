@@ -3,11 +3,14 @@ import time
 import uuid
 import cv2
 
-nameOfUser = input("Enter your first name: ")
-os.mkdir(os.getcwd(), 'temp')
-os.mkdir(os.path.join(os.getcwd, 'temp'), nameOfUser)
-IMAGES_PATH = os.path.join('temp', 'hisbaan')
-number_images = 60
+nameOfUser = input("Enter your name: ")
+
+IMAGES_PATH = os.path.join('images_testing', nameOfUser)
+temp_path = os.path.join(os.getcwd(), 'images_testing')
+os.mkdir(temp_path)
+os.mkdir(os.path.join(temp_path, nameOfUser))
+number_images = 10
+
 
 cap = cv2.VideoCapture(0)
 for imgnum in range(number_images):
