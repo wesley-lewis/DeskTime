@@ -23,9 +23,6 @@ export default function Home({navigation}) {
         <Image source={require('../assets/attend.png')} style={homeStyles.Image}></Image>
     </View>
     <View  style={homeStyles.thirdText}>
-        <Text style={{marginLeft: 80, color:'white'}}>
-            By
-        </Text>
         <Text style={{marginLeft: 45, color:'white'}}>Wesley Lewis</Text>
         <Text style={{marginLeft: 48, color:'white'}}>Amey Bagwe</Text>
         <Text style={{marginLeft: 30, color:'white'}}>Vailantan Fernandes</Text>
