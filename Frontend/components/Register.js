@@ -99,5 +99,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#AED6F1",
+    marginBottom: 38
   },
 });
