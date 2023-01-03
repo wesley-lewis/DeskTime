@@ -40,19 +40,17 @@ export default function ClassModal({ route, navigation }) {
 
   useEffect(() => {
     // calling func and saving data in fetchedUserData
-    if (decision === "Create") {
-      async function getCreateClassData() {
-        const classes = await fetchCreateClassData();
-        setFetchedCreateClassData(classes);
-      }
-      getCreateClassData();
-    } else if (decision === "Join") {
-      async function getJoinClassData() {
-        const classes = await fetchJoinClassData();
-        setFetchedJoinClassData(classes);
-      }
-      getJoinClassData();
+    async function getCreateClassData() {
+      const classes = await fetchCreateClassData();
+      setFetchedCreateClassData(classes);
     }
+    getCreateClassData();
+
+    async function getJoinClassData() {
+      const classes = await fetchJoinClassData();
+      setFetchedJoinClassData(classes);
+    }
+    getJoinClassData();
   }, []);
 
   // taking input for creating new class for storing in database
@@ -142,28 +140,38 @@ export default function ClassModal({ route, navigation }) {
         return obj.code === joinInputValues.code;
       });
 
-      const joinClassData = {
-        joinEmail: globalEmail,
-        createEmail: codeObj.userEmail,
-        class: codeObj.class,
-        subject: codeObj.subject,
-        code: joinInputValues.code,
-      };
+      // to check if not joining repeatedly
+      const codeObjJoin = fetchedJoinClassData.find((obj) => {
+        return obj.code === joinInputValues.code;
+      });
 
       if (codeObj === undefined) {
         Alert.alert(
           "Class does not exists !!",
           "Make sure you have entered the right code"
         );
-        console.log(fetchedJoinClassData);
         setConfirmClassJoined(false);
+      } else if (codeObjJoin !== undefined) {
+        Alert.alert(
+          "Class already joined !!",
+          "Please check the joined class tab"
+        );
+      } else if (globalEmail === codeObj.userEmail) {
+        Alert.alert(
+          "Class created from this account !!",
+          "Cannot join your own class"
+        );
       } else {
+        const joinClassData = {
+          joinEmail: globalEmail,
+          createEmail: codeObj.userEmail,
+          class: codeObj.class,
+          subject: codeObj.subject,
+          code: joinInputValues.code,
+        };
+        inputJoinClassData(joinClassData);
         setConfirmClassJoined(true);
-      }
-
-      if (confirmClassJoined) {
-        // inputJoinClassData(joinClassData);
-        console.log(joinClassData);
+        console.log(confirmClassJoined);
       }
     }
   }
@@ -314,7 +322,3 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 });
-
-{
-  /*  */
-}
