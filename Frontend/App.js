@@ -11,6 +11,7 @@ import IconButton from "./models/IconButton";
 import ClassModal from "./components/classComponents/ClassModal";
 import ClassCreated from "./components/classComponents/ClassCreated";
 import ClassJoined from "./components/classComponents/ClassJoined";
+import Attendance from "./components/Attendance";
 
 // View -> UI View(IOS), AndroidView(Android)
 const Stack = createNativeStackNavigator();
@@ -21,6 +22,7 @@ let Email = "";
 function Class({ route }) {
   const { email } = route.params;
   Email = email;
+
   return (
     <BottomTabs.Navigator
       screenOptions={() => ({
@@ -75,6 +77,7 @@ function App() {
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Register" component={Register} />
+          <Stack.Screen name="Attendance" component={Attendance} />
           <Stack.Screen name="Create/Join Class" component={ClassModal} />
           <Stack.Screen
             name="Class"

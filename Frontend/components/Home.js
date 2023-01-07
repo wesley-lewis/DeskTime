@@ -29,7 +29,7 @@ export default function Home({ navigation }) {
         </View>
         <View>
           <Image
-            source={require("../assets/attend.png")}
+            source={require("../assets/attendance_new.jpg")}
             style={homeStyles.Image}
           ></Image>
         </View>
@@ -179,6 +179,10 @@ const homeStyles = StyleSheet.create({
   },
 
   Image: {
+    // flex: 1,
     width: 395,
+    height: 300,
+    resizeMode: "cover",
+    // alignItems: "center",
   },
 });

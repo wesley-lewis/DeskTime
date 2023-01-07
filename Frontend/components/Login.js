@@ -10,8 +10,9 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useEffect } from "react";
-import { fetchUserData } from "../util/http";
+import { fetchUserData, inputLoginData } from "../util/http";
 import { Alert } from "react-native";
+import { date } from "../util/date";
 
 export default function Login({ navigation }) {
   // fetching data from firebase database user collections
@@ -49,6 +50,11 @@ export default function Login({ navigation }) {
       password: inputValues.password,
     };
 
+    const loginData = {
+      loggedEmail: inputValues.email,
+      dateLogged: date(),
+    };
+
     let result = fetchedUserData.find((indData) => {
       return indData.email === formData.email &&
         indData.password === formData.password
@@ -65,8 +71,9 @@ export default function Login({ navigation }) {
     if (confirmLogin === true) {
       Alert.alert("Login Successfull !!!", "You can create or join the class");
       console.log(formData);
+      inputLoginData(loginData);
       navigation.navigate("Class", formData);
-    } else {
+    } else if (confirmLogin === false) {
       Alert.alert(
         "Login Unsuccessfull",
         "Incorrect Email or Password!! Or make sure you have registered"

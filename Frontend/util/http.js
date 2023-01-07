@@ -111,3 +111,42 @@ export async function fetchJoinClassData() {
   return classes;
 }
 /**********************************************************/
+
+/*********************************************************/
+// LOGIN USER DATA AT TIME
+
+export function inputLoginData(loginData) {
+  axios
+    .post(
+      "https://react-native-ababa-default-rtdb.firebaseio.com/loginData.json",
+      loginData
+    )
+    .then((res) => {
+      console.log(res.data);
+    })
+    .catch((error) => console.log(error));
+}
+
+export async function fetchLoginData() {
+  const response = await axios.get(
+    "https://react-native-ababa-default-rtdb.firebaseio.com/loginData.json"
+  );
+
+  //storing the objects in classes array
+  const loggedIn = [];
+  for (const key in response.data) {
+    const loginObj = {
+      id: key, // every unique key of object data is added as new attr in that object
+      loggedEmail: response.data[key].loggedEmail,
+      dateLogged: response.data[key].dateLogged,
+    };
+    loggedIn.push(loginObj); // pushing it on users array
+  }
+  return loggedIn;
+}
+
+export function deleteTopLoginIds(id) {
+  return axios.delete(`https://react-native-ababa-default-rtdb.firebaseio.com/loginData/${id}.json`)
+}
+
+/***************************************************************/

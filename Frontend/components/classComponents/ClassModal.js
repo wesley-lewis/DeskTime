@@ -141,7 +141,11 @@ export default function ClassModal({ route, navigation }) {
       });
 
       // to check if not joining repeatedly
-      const codeObjJoin = fetchedJoinClassData.find((obj) => {
+      const emailObjJoin = fetchedJoinClassData.filter((obj) => {
+        return obj.joinEmail === globalEmail;
+      });
+
+      const codeObjJoin = emailObjJoin.find((obj) => {
         return obj.code === joinInputValues.code;
       });
 
@@ -151,17 +155,13 @@ export default function ClassModal({ route, navigation }) {
           "Make sure you have entered the right code"
         );
         setConfirmClassJoined(false);
-      } else if (codeObjJoin !== undefined) {
-        Alert.alert(
-          "Class already joined !!",
-          "Please check the joined class tab"
-        );
       } else if (globalEmail === codeObj.userEmail) {
         Alert.alert(
           "Class created from this account !!",
           "Cannot join your own class"
         );
-      } else {
+        setConfirmClassJoined(false);
+      } else if (codeObjJoin === undefined) {
         const joinClassData = {
           joinEmail: globalEmail,
           createEmail: codeObj.userEmail,
@@ -171,7 +171,13 @@ export default function ClassModal({ route, navigation }) {
         };
         inputJoinClassData(joinClassData);
         setConfirmClassJoined(true);
-        console.log(confirmClassJoined);
+        navigation.navigate("ClassJoined");
+      } else if (codeObjJoin.code === joinInputValues.code) {
+        Alert.alert(
+          "Class already joined !!",
+          "Please check the joined class tab"
+        );
+        setConfirmClassJoined(false);
       }
     }
   }
