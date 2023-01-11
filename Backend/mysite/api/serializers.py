@@ -12,4 +12,4 @@ class StudentSerializer(serializers.ModelSerializer):
 class PictureSerializer(forms.ModelForm):
     class Meta:
         model = Pictures
-        fields = ['image','name']
+        fields = ['image']

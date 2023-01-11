@@ -10,5 +10,5 @@ class Pictures(models.Model):
     # def nameFile(instance, file_name):
     #     return '/'.join(['images',str(instance.name),file_name])
     image = models.ImageField(upload_to="my_picture/" ,blank=True)
-    name = models.CharField(max_length=100,blank=True)
+
 
