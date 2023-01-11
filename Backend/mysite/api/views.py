@@ -32,6 +32,9 @@ def studentDetails(request):
 def pictureDetails(request):
 
     if request.method == "POST":
+        if not request.FILES:
+            return HttpResponse("Image not found")
+            
         serializer = PictureSerializer(data=request.POST, files=request.FILES)
         if serializer.is_valid():
             serializer.save()

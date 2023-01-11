@@ -6,13 +6,22 @@ class User(models.Model):
   email = models.EmailField(max_length=30)
   name = models.CharField(max_length=30)
   
+  def __str__(self):
+    return "User: " + str(self.user_id) + " " + self.email + " " + self.name
+
 class Classroom(models.Model):
   classroom_id = models.AutoField(primary_key=True)
   name = models.CharField(max_length=30)
   owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
+  def __str__(self):
+    return self.name
+
 class Participants(models.Model):
   p_id = models.AutoField(primary_key=True)
-  userID = models.ForeignKey(User, on_delete=models.CASCADE)
-  roomID = models.ForeignKey(Classroom, on_delete=models.CASCADE)
+  user = models.ForeignKey(User, on_delete=models.CASCADE)
+  classroom= models.ForeignKey(Classroom, on_delete=models.CASCADE)
+
+  def __str__(self):
+    return self.userID.name
 
