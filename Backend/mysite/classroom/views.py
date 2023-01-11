@@ -3,4 +3,4 @@ from django.http import HttpResponse
 
 def createRoom(request):
   
-  return HttpResponse("Hello world")
+  return HttpResponse("Create room")
