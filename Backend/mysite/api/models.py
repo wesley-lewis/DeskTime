@@ -9,6 +9,6 @@ class Pictures(models.Model):
     #for giving folder names as per user
     # def nameFile(instance, file_name):
     #     return '/'.join(['images',str(instance.name),file_name])
-    image = models.ImageField(upload_to="my_picture/" ,blank=True)
+    image = models.ImageField(upload_to="class_photo/" ,blank=True)
 
 

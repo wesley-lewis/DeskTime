@@ -1,6 +1,5 @@
 from django.shortcuts import render, HttpResponse
 from rest_framework.parsers import JSONParser
-
 from .models import Students, Pictures
 from .serializers import StudentSerializer, PictureSerializer
 from django.http import JsonResponse
@@ -8,6 +7,7 @@ from rest_framework.parsers import JSONParser
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from .main import faceDetection
 
 @csrf_exempt
 # Create your views here.
@@ -32,13 +32,10 @@ def studentDetails(request):
 def pictureDetails(request):
 
     if request.method == "POST":
-        if not request.FILES:
-            return HttpResponse("Image not found")
-            
         serializer = PictureSerializer(data=request.POST, files=request.FILES)
         if serializer.is_valid():
             serializer.save()
-            print(serializer.data)
+            faceDetection("C:\\Users\\vailantan fernandes\\PycharmProjects\\Face_detection\\DeskTime\\Backend\\mysite\\media\\class_photo\\class.jpg")
             return HttpResponse("image uploaded")
         else:
             print(serializer.errors)
