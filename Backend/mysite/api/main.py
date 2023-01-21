@@ -1,7 +1,7 @@
 import numpy as np
 import cv2
 path = "api\\output\\"
-net = cv2.dnn.readNetFromCaffe("api/prototext","api/res10_300x300_ssd_iter_140000.caffemodel" )
+net = cv2.dnn.readNetFromCaffe("C:\\Users\\vailantan fernandes\\PycharmProjects\\Face_detection\\DeskTime\\Backend\\mysite\\api\\prototext" , "C:\\Users\\vailantan fernandes\\PycharmProjects\\Face_detection\\DeskTime\\Backend\\mysite\\api\\res10_300x300_ssd_iter_140000.caffemodel")
 # cv2.namedWindow("Output", cv2.WINDOW_NORMAL)
 
 
