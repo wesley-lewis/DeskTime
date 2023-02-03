@@ -280,11 +280,6 @@ const styles = StyleSheet.create({
     width: 350,
     alignItems: "center",
   },
-  clsButton: {
-    height: 45,
-    marginTop: 10,
-    backgroundColor: "transparent",
-  },
   centeredView: {
     flex: 1,
     justifyContent: "center",

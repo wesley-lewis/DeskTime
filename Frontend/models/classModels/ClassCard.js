@@ -1,67 +1,68 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  Dimensions,
-  Image,
-  Pressable,
-} from "react-native";
+import { View, Text, StyleSheet, Dimensions, Pressable } from "react-native";
 import React from "react";
 
 import { useNavigation } from "@react-navigation/native";
 
-export default function ClassCard({ data }) {
-  // console.log(data.item);
+import AppLoading from "expo-app-loading";
+import { useFonts, Inter_900Black } from "@expo-google-fonts/inter";
 
+export default function ClassCard({ data }) {
   const navigation = useNavigation();
 
-  const optData =
-    data.item.userEmail === undefined ? data.item.createEmail : data.item.code;
+  console.log(data.item);
 
   function pressHandler() {
-    navigation.navigate("Attendance", data.item);
-    console.log("pressed");
+    data.item.userEmail === undefined
+      ? navigation.navigate("AttendanceJoin", data.item)
+      : navigation.navigate("AttendanceCreate", data.item);
   }
 
-  return (
-    <Pressable
-      onPress={pressHandler}
-      style={({ pressed }) => pressed && styles.pressed}
-    >
-      <View style={styles.cardContainer}>
-        <Image
-          style={styles.imageStyle}
-          source={require("../../assets/cardImg.jpg")}
-        />
-        <View style={styles.infoStyle}>
-          <View style={styles.displayView}>
-            <Text style={styles.title}>{data.item.class}</Text>
-          </View>
-          <View style={styles.displayView}>
-            <Text style={styles.title}>{data.item.subject}</Text>
-          </View>
-          <View style={styles.displayView}>
-            <Text style={styles.body}>{optData}</Text>
-          </View>
+  let [fontsLoaded] = useFonts({
+    Inter_900Black,
+  });
+
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
+    return (
+      <Pressable
+        onPress={pressHandler}
+        style={({ pressed }) => pressed && styles.pressed}
+      >
+        <View
+          style={[
+            styles.cardContainer,
+            { backgroundColor: `hsl(50 ,100%, 50%)` },
+          ]}
+        >
+          <Text style={[styles.txtStyle, { marginLeft: 10 }]}>
+            {data.item.class}
+          </Text>
+          <Text style={[styles.txtStyle, { textAlign: "center" }]}>
+            {data.item.subject}
+          </Text>
+          <Text style={[styles.txtStyle, { marginLeft: 10 }]}>
+            {data.item.createEmail === undefined
+              ? data.item.code
+              : data.item.createEmail}
+          </Text>
         </View>
-      </View>
-    </Pressable>
-  );
+      </Pressable>
+    );
+  }
 }
 
 const widthDevice = Math.round(Dimensions.get("window").width);
 
 const styles = StyleSheet.create({
-  pressed: {
-    opacity: 0.75,
-  },
   cardContainer: {
+    justifyContent: "space-evenly",
     marginVertical: 18,
     width: widthDevice - 25,
     marginLeft: 10,
-    backgroundColor: "#096db0",
     height: 250,
-    borderRadius: 20,
+    borderBottomEndRadius: 20,
+    borderTopRightRadius: 20,
     shadowColor: "black",
     shadowOffset: {
       width: 5,
@@ -71,33 +72,10 @@ const styles = StyleSheet.create({
     elevation: 9,
     shadowRadius: 5,
   },
-  imageStyle: {
-    height: 130,
-    width: widthDevice - 25,
-    // borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    opacity: 0.75,
-  },
-  title: {
-    marginTop: 5,
-    fontSize: 15,
-    fontWeight: "500",
-    textAlign: "center",
-    color: "#2f0491",
-  },
-  body: {
-    marginTop: 5,
-    fontSize: 15,
-    fontWeight: "300",
-    textAlign: "center",
-    color: "#2f0491",
-  },
-  displayView: {
-    backgroundColor: "#e4d9fd",
-    marginVertical: 5,
-    borderRadius: 5,
-    width: "90%",
-    marginLeft: 15,
-    height: "18%",
+  txtStyle: {
+    fontWeight: "bold",
+    fontSize: 20,
+    fontFamily: "Inter_900Black",
+    // fontFamily: "Pixel",
   },
 });

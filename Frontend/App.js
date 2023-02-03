@@ -11,7 +11,8 @@ import IconButton from "./models/IconButton";
 import ClassModal from "./components/classComponents/ClassModal";
 import ClassCreated from "./components/classComponents/ClassCreated";
 import ClassJoined from "./components/classComponents/ClassJoined";
-import Attendance from "./components/Attendance";
+import AttendanceCreate from "./components/attendanceComponents/AttendanceCreate";
+import AttendanceJoin from "./components/attendanceComponents/AttendanceJoin";
 
 // View -> UI View(IOS), AndroidView(Android)
 const Stack = createNativeStackNavigator();
@@ -77,7 +78,8 @@ function App() {
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Register" component={Register} />
-          <Stack.Screen name="Attendance" component={Attendance} />
+          <Stack.Screen name="AttendanceCreate" component={AttendanceCreate} />
+          <Stack.Screen name="AttendanceJoin" component={AttendanceJoin} />
           <Stack.Screen name="Create/Join Class" component={ClassModal} />
           <Stack.Screen
             name="Class"
