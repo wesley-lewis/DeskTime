@@ -29,7 +29,7 @@ export default function Home({ navigation }) {
         </View>
         <View>
           <Image
-            source={require("../assets/attendance_new.jpg")}
+            source={require("../assets/attendance_new.png")}
             style={homeStyles.Image}
           ></Image>
         </View>

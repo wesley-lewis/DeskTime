@@ -48,7 +48,10 @@ export default function ClassCreated() {
       deleteTopLoginIds(userIds[i]);
     }
   }
-  const renderClass = (item) => <ClassCard data={{ ...item }} />;
+
+  const renderClass = (item) => (
+    <ClassCard data={{ ...item }} />
+  );
 
   return (
     <LinearGradient style={styles.root} colors={["red", "blue"]}>

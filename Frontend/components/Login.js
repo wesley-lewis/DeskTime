@@ -150,14 +150,4 @@ const styles = StyleSheet.create({
     height: 30,
     marginBottom: 30,
   },
-
-  loginBtn: {
-    width: "80%",
-    borderRadius: 25,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#AED6F1",
-    marginBottom: 45,
-  },
 });
