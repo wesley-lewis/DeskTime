@@ -21,8 +21,9 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('',include('api.urls')),
+    # path('',include('api.urls')),
     path('', include('classroom.urls')),
+    path('cnn/', include('cnnmodel.urls')),
 
 ]
 if settings.DEBUG:

@@ -4,3 +4,6 @@ from django.http import HttpResponse
 def createRoom(request):
   
   return HttpResponse("Create room")
+
+def trainTheModel(request):
+  return ""
