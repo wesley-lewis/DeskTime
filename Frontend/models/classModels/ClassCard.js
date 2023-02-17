@@ -3,9 +3,6 @@ import React from "react";
 
 import { useNavigation } from "@react-navigation/native";
 
-import AppLoading from "expo-app-loading";
-import { useFonts, Inter_900Black } from "@expo-google-fonts/inter";
-
 export default function ClassCard({ data }) {
   const navigation = useNavigation();
 
@@ -17,39 +14,31 @@ export default function ClassCard({ data }) {
       : navigation.navigate("AttendanceCreate", data.item);
   }
 
-  let [fontsLoaded] = useFonts({
-    Inter_900Black,
-  });
-
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  } else {
-    return (
-      <Pressable
-        onPress={pressHandler}
-        style={({ pressed }) => pressed && styles.pressed}
+  return (
+    <Pressable
+      onPress={pressHandler}
+      style={({ pressed }) => pressed && styles.pressed}
+    >
+      <View
+        style={[
+          styles.cardContainer,
+          { backgroundColor: `hsl(50 ,100%, 50%)` },
+        ]}
       >
-        <View
-          style={[
-            styles.cardContainer,
-            { backgroundColor: `hsl(50 ,100%, 50%)` },
-          ]}
-        >
-          <Text style={[styles.txtStyle, { marginLeft: 10 }]}>
-            {data.item.class}
-          </Text>
-          <Text style={[styles.txtStyle, { textAlign: "center" }]}>
-            {data.item.subject}
-          </Text>
-          <Text style={[styles.txtStyle, { marginLeft: 10 }]}>
-            {data.item.createEmail === undefined
-              ? data.item.code
-              : data.item.createEmail}
-          </Text>
-        </View>
-      </Pressable>
-    );
-  }
+        <Text style={[styles.txtStyle, { marginLeft: 10 }]}>
+          {data.item.class}
+        </Text>
+        <Text style={[styles.txtStyle, { textAlign: "center" }]}>
+          {data.item.subject}
+        </Text>
+        <Text style={[styles.txtStyle, { marginLeft: 10 }]}>
+          {data.item.createEmail === undefined
+            ? data.item.code
+            : data.item.createEmail}
+        </Text>
+      </View>
+    </Pressable>
+  );
 }
 
 const widthDevice = Math.round(Dimensions.get("window").width);
@@ -75,7 +64,5 @@ const styles = StyleSheet.create({
   txtStyle: {
     fontWeight: "bold",
     fontSize: 20,
-    fontFamily: "Inter_900Black",
-    // fontFamily: "Pixel",
   },
 });
