@@ -28,6 +28,7 @@ export async function fetchUserData() {
     const userObj = {
       id: key, // every unique key of object data is added as new attr in that object
       email: response.data[key].email,
+      rollno: response.data[key].rollno,
       password: response.data[key].password,
     };
     users.push(userObj); // pushing it on users array
@@ -146,7 +147,9 @@ export async function fetchLoginData() {
 }
 
 export function deleteTopLoginIds(id) {
-  return axios.delete(`https://react-native-ababa-default-rtdb.firebaseio.com/loginData/${id}.json`)
+  return axios.delete(
+    `https://react-native-ababa-default-rtdb.firebaseio.com/loginData/${id}.json`
+  );
 }
 
 /***************************************************************/

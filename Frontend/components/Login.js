@@ -89,7 +89,7 @@ export default function Login({ navigation }) {
       <View style={styles.inputView}>
         <TextInput
           style={styles.TextInput}
-          placeholder="Email."
+          placeholder="Username."
           placeholderTextColor="#003f5c"
           onChangeText={inputChangeHandler.bind(this, "email")}
         />

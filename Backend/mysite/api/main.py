@@ -42,4 +42,5 @@ def faceDetection(imgPath):
     #         #             cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
     # cv2.imshow("Output", image)
     # cv2.waitKey(0)
+    
 

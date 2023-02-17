@@ -24,6 +24,7 @@ export default function Register({ navigation }) {
   // taking input from text input and setting state
   const [inputValues, setInputValues] = useState({
     email: "",
+    rollno: "",
     password: "",
     cpassword: "",
   });
@@ -39,9 +40,23 @@ export default function Register({ navigation }) {
   function submitHandler() {
     const formData = {
       email: inputValues.email,
+      rollno: inputValues.rollno,
       password: inputValues.password,
       cpassword: inputValues.cpassword,
     };
+
+    const formDataNew = {
+      name: inputValues.email,
+      roll_no: inputValues.rollno,
+    };
+
+    fetch("http://192.168.164.49:8000/students/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formDataNew),
+    });
 
     // checking if user exists in database
     let result = fetchedUserData.find(function (obj) {
@@ -81,10 +96,20 @@ export default function Register({ navigation }) {
       <View style={styles.inputView}>
         <TextInput
           style={styles.TextInput}
-          placeholder="Email."
+          placeholder="Username."
           placeholderTextColor="#003f5c"
           onChangeText={inputChangeHandler.bind(this, "email")}
           value={inputValues.email}
+        />
+      </View>
+
+      <View style={styles.inputView}>
+        <TextInput
+          style={styles.TextInput}
+          placeholder="Roll No."
+          placeholderTextColor="#003f5c"
+          onChangeText={inputChangeHandler.bind(this, "rollno")}
+          value={inputValues.rollno}
         />
       </View>
 
