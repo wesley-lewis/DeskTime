@@ -18,9 +18,6 @@ export default function Login({ navigation }) {
   // fetching data from firebase database user collections
   const [fetchedUserData, setFetchedUserData] = useState([]);
 
-  // confirming login state
-  const [confirmLogin, setConfirmLogin] = useState(false);
-
   useEffect(() => {
     // setting fetchedUserData
     async function getUserData() {
@@ -43,6 +40,12 @@ export default function Login({ navigation }) {
     });
   }
 
+  // reset form values after logging in
+  function resetChangeHandler() {
+    inputValues.email = "";
+    inputValues.password = "";
+  }
+
   // verification and validation
   function submitHandler() {
     const formData = {
@@ -62,22 +65,17 @@ export default function Login({ navigation }) {
         : false;
     });
     // console.log(result);
-    if (result) {
-      setConfirmLogin(true);
-    } else {
-      setConfirmLogin(false);
-    }
-
-    if (confirmLogin === true) {
-      Alert.alert("Login Successfull !!!", "You can create or join the class");
-      console.log(formData);
-      inputLoginData(loginData);
-      navigation.navigate("Class", formData);
-    } else if (confirmLogin === false) {
+    if (!result) {
       Alert.alert(
         "Login Unsuccessfull",
-        "Incorrect Email or Password!! Or make sure you have registered"
+        "Incorrect Data Filled!! Or make sure you have registered or you must not have been logged out !!"
       );
+    } else if (result) {
+      console.log(formData);
+      inputLoginData(loginData);
+      Alert.alert("Login Successfull !!!", "You can create or join the class");
+      navigation.navigate("Class", formData);
+      resetChangeHandler();
     }
   }
 

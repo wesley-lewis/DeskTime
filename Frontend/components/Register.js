@@ -9,9 +9,6 @@ export default function Register({ navigation }) {
   // to save array of obj of firebase user collection
   const [fetchedUserData, setFetchedUserData] = useState([]);
 
-  // for confirming registrations if not repeated
-  const [confirmRegister, setConfirmRegister] = useState(false);
-
   useEffect(() => {
     // calling func and saving data in fetchedUserData
     async function getUserData() {
@@ -36,6 +33,14 @@ export default function Register({ navigation }) {
     });
   }
 
+  // reset form values after registering
+  function resetChangeHandler() {
+    inputValues.email = "";
+    inputValues.rollno = "";
+    inputValues.password = "";
+    inputValues.cpassword = "";
+  }
+
   // verification of data
   function submitHandler() {
     const formData = {
@@ -45,46 +50,50 @@ export default function Register({ navigation }) {
       cpassword: inputValues.cpassword,
     };
 
-    const formDataNew = {
-      name: inputValues.email,
-      roll_no: inputValues.rollno,
-    };
+    // const formDataNew = {
+    //   name: inputValues.email,
+    //   roll_no: inputValues.rollno,
+    // };
 
-    fetch("http://192.168.164.49:8000/students/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formDataNew),
-    });
+    // fetch("http://192.168.164.49:8000/students/", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(formDataNew),
+    // });
 
     // checking if user exists in database
     let result = fetchedUserData.find(function (obj) {
       return obj.email === formData.email;
     });
 
-    if (result === undefined) {
-      setConfirmRegister(true);
-    } else {
-      setConfirmRegister(false);
-    }
+    let result2 = fetchedUserData.find(function (obj) {
+      return obj.rollno === formData.rollno;
+    });
 
     // password matching
     if (inputValues.password !== inputValues.cpassword) {
       Alert.alert("Could not register", "Passwords did not match");
-    } else if (confirmRegister === false) {
+    } else if (result !== undefined) {
       Alert.alert(
         "Could not register",
         "User is already registered with same id"
       );
+    } else if (result2 !== undefined) {
+      Alert.alert(
+        "Could not register",
+        "User is already registered with roll no"
+      );
     } else if (
+      result === undefined &&
       inputValues.password === inputValues.cpassword &&
-      inputValues.password !== "" &&
-      confirmRegister === true
+      inputValues.password !== ""
     ) {
       inputUserData(formData);
       Alert.alert("Registration Successfull !!!", "Make sure to login");
       navigation.navigate("Login");
+      resetChangeHandler();
     }
   }
 
