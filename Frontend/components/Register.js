@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, Image, TextInput, Alert } from "react-native";
 import PressButton from "../models/PressButton";
 import { inputUserData } from "../util/http";
 import { fetchUserData } from "../util/http";
+import LottieView from "lottie-react-native";
 
 export default function Register({ navigation }) {
   // to save array of obj of firebase user collection
@@ -98,54 +99,63 @@ export default function Register({ navigation }) {
   }
 
   return (
-    <View style={styles.container}>
-      <Image style={styles.image} source={require("../assets/login.jpg")} />
-
-      <StatusBar style="auto" />
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.TextInput}
-          placeholder="Username."
-          placeholderTextColor="#003f5c"
-          onChangeText={inputChangeHandler.bind(this, "email")}
-          value={inputValues.email}
+    <>
+      <View style={{ flex: 1 }}>
+        <LottieView
+          autoPlay
+          loop
+          source={require("../animations/register.json")}
         />
       </View>
+      <View style={styles.container}>
+        {/* <Image style={styles.image} source={require("../assets/login.jpg")} /> */}
 
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.TextInput}
-          placeholder="Roll No."
-          placeholderTextColor="#003f5c"
-          onChangeText={inputChangeHandler.bind(this, "rollno")}
-          value={inputValues.rollno}
-        />
+        <StatusBar style="auto" />
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.TextInput}
+            placeholder="Username."
+            placeholderTextColor="#003f5c"
+            onChangeText={inputChangeHandler.bind(this, "email")}
+            value={inputValues.email}
+          />
+        </View>
+
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.TextInput}
+            placeholder="Roll No."
+            placeholderTextColor="#003f5c"
+            onChangeText={inputChangeHandler.bind(this, "rollno")}
+            value={inputValues.rollno}
+          />
+        </View>
+
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.TextInput}
+            placeholder="Password."
+            placeholderTextColor="#003f5c"
+            secureTextEntry={true}
+            onChangeText={inputChangeHandler.bind(this, "password")}
+            value={inputValues.password}
+          />
+        </View>
+
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.TextInput}
+            placeholder="Confirm Password."
+            placeholderTextColor="#003f5c"
+            secureTextEntry={true}
+            onChangeText={inputChangeHandler.bind(this, "cpassword")}
+            value={inputValues.cpassword}
+          />
+        </View>
+
+        <PressButton onPress={submitHandler}>REGISTER</PressButton>
       </View>
-
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.TextInput}
-          placeholder="Password."
-          placeholderTextColor="#003f5c"
-          secureTextEntry={true}
-          onChangeText={inputChangeHandler.bind(this, "password")}
-          value={inputValues.password}
-        />
-      </View>
-
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.TextInput}
-          placeholder="Confirm Password."
-          placeholderTextColor="#003f5c"
-          secureTextEntry={true}
-          onChangeText={inputChangeHandler.bind(this, "cpassword")}
-          value={inputValues.cpassword}
-        />
-      </View>
-
-      <PressButton onPress={submitHandler}>REGISTER</PressButton>
-    </View>
+    </>
   );
 }
 

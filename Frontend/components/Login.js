@@ -12,12 +12,16 @@ import {
 import { useEffect } from "react";
 import { fetchUserData, inputLoginData } from "../util/http";
 import { Alert } from "react-native";
+import LottieView from "lottie-react-native";
 import { date } from "../util/date";
 
 export default function Login({ navigation }) {
   // fetching data from firebase database user collections
   const [fetchedUserData, setFetchedUserData] = useState([]);
 
+  const loginAnimation = (
+    <LottieView autoPlay loop source={require("../animations/login.json")} />
+  );
   useEffect(() => {
     // setting fetchedUserData
     async function getUserData() {
@@ -80,35 +84,43 @@ export default function Login({ navigation }) {
   }
 
   return (
-    <View style={styles.container}>
-      <Image style={styles.image} source={require("../assets/login.jpg")} />
-
-      <StatusBar style="auto" />
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.TextInput}
-          placeholder="Username."
-          placeholderTextColor="#003f5c"
-          onChangeText={inputChangeHandler.bind(this, "email")}
+    <>
+      <View style={{ flex: 1.5 }}>
+        <LottieView
+          autoPlay
+          loop
+          source={require("../animations/login.json")}
         />
       </View>
+      <View style={styles.container}>
+        {/* <Image style={styles.image} source={require("../assets/login.jpg")} /> */}
+        <StatusBar style="auto" />
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.TextInput}
+            placeholder="Username."
+            placeholderTextColor="#003f5c"
+            onChangeText={inputChangeHandler.bind(this, "email")}
+          />
+        </View>
 
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.TextInput}
-          placeholder="Password."
-          placeholderTextColor="#003f5c"
-          secureTextEntry={true}
-          onChangeText={inputChangeHandler.bind(this, "password")}
-        />
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.TextInput}
+            placeholder="Password."
+            placeholderTextColor="#003f5c"
+            secureTextEntry={true}
+            onChangeText={inputChangeHandler.bind(this, "password")}
+          />
+        </View>
+
+        <TouchableOpacity>
+          <Text style={styles.forgot_button}>Forgot Password?</Text>
+        </TouchableOpacity>
+
+        <PressButton onPress={submitHandler}>LOGIN</PressButton>
       </View>
-
-      <TouchableOpacity>
-        <Text style={styles.forgot_button}>Forgot Password?</Text>
-      </TouchableOpacity>
-
-      <PressButton onPress={submitHandler}>LOGIN</PressButton>
-    </View>
+    </>
   );
 }
 
