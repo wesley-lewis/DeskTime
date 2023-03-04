@@ -1,5 +1,14 @@
-import { View, Text, StyleSheet, Dimensions, Pressable } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  Pressable,
+  Image,
+} from "react-native";
 import React from "react";
+
+import LottieView from "lottie-react-native";
 
 import { useNavigation } from "@react-navigation/native";
 
@@ -25,17 +34,36 @@ export default function ClassCard({ data }) {
           { backgroundColor: `hsl(50 ,100%, 50%)` },
         ]}
       >
-        <Text style={[styles.txtStyle, { marginLeft: 10 }]}>
-          {data.item.class}
-        </Text>
-        <Text style={[styles.txtStyle, { textAlign: "center" }]}>
-          {data.item.subject}
-        </Text>
-        <Text style={[styles.txtStyle, { marginLeft: 10 }]}>
-          {data.item.createEmail === undefined
-            ? data.item.code
-            : data.item.createEmail}
-        </Text>
+        {/* <Image
+          style={styles.imgCard}
+          source={require("../../assets/attendance.jpg")}
+        ></Image> */}
+
+        <View style={{ flex: 1, marginBottom: 20 }}>
+          <View style={{ marginLeft: 80 }}>
+            <LottieView
+              style={{ width: 200 }}
+              autoPlay
+              loop
+              source={require("../../animations/subject.json")}
+            />
+          </View>
+        </View>
+        <View style={{ flex: 2, marginTop: 100 }}>
+          <Text style={[styles.txtStyle, { marginLeft: 10 }]}>
+            {data.item.class}
+          </Text>
+          <Text
+            style={[styles.txtStyle, { textAlign: "center", marginTop: 18 }]}
+          >
+            {data.item.subject}
+          </Text>
+          <Text style={[styles.txtStyle, { marginLeft: 10, marginTop: 18 }]}>
+            {data.item.createEmail === undefined
+              ? data.item.code
+              : data.item.createEmail}
+          </Text>
+        </View>
       </View>
     </Pressable>
   );
@@ -49,8 +77,8 @@ const styles = StyleSheet.create({
     marginVertical: 18,
     width: widthDevice - 25,
     marginLeft: 10,
-    height: 250,
-    borderBottomEndRadius: 20,
+    height: 300,
+    borderBottomLeftRadius: 20,
     borderTopRightRadius: 20,
     shadowColor: "black",
     shadowOffset: {
@@ -60,6 +88,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.75,
     elevation: 9,
     shadowRadius: 5,
+  },
+  imgCard: {
+    width: 368,
+    height: 169,
+    borderTopRightRadius: 20,
   },
   txtStyle: {
     fontWeight: "bold",
