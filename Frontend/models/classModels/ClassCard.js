@@ -34,19 +34,18 @@ export default function ClassCard({ data }) {
           { backgroundColor: `hsl(50 ,100%, 50%)` },
         ]}
       >
-        {/* <Image
-          style={styles.imgCard}
-          source={require("../../assets/attendance.jpg")}
-        ></Image> */}
-
         <View style={{ flex: 1, marginBottom: 20 }}>
-          <View style={{ marginLeft: 80 }}>
-            <LottieView
+          <View>
+            <Image
+              style={styles.imgCard}
+              source={require("../../assets/books.jpg")}
+            ></Image>
+            {/* <LottieView
               style={{ width: 200 }}
               autoPlay
               loop
               source={require("../../animations/subject.json")}
-            />
+            /> */}
           </View>
         </View>
         <View style={{ flex: 2, marginTop: 100 }}>
