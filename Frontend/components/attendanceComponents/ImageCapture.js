@@ -1,7 +1,6 @@
-import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, Image, StyleSheet } from "react-native";
 import React from "react";
 import axios from "axios";
-
 import * as ImagePicker from "expo-image-picker";
 import { launchCameraAsync } from "expo-image-picker";
 
@@ -11,7 +10,6 @@ import { useState } from "react";
 export default function ImageCapture() {
   const [image, setImage] = useState(null); // setting an image
   const [camera, setCamera] = useState(null); // setting an image
-
   async function getImageCamera() {
     const camera = await launchCameraAsync({
       allowsEditing: true,
@@ -24,14 +22,14 @@ export default function ImageCapture() {
       setCamera(camera.assets[0].uri);
     }
 
-    const formDataNew = {
-      image: camera,
-    };
+    // const formDataNew = {
+    //   image: camera,
+    // };
 
-    axios
-      .post("http://192.168.164.49:8000/pictures/", formDataNew)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+    // axios
+    //   .post("http://192.168.164.49:8000/pictures/", formDataNew)
+    //   .then((res) => console.log(res))
+    //   .catch((err) => console.log(err));
   }
 
   async function takeImageHandler() {
@@ -42,14 +40,14 @@ export default function ImageCapture() {
       quality: 0.5,
     });
 
-    const formDataNew = {
-      image: image,
-    };
+    // const formDataNew = {
+    //   image: image,
+    // };
 
-    axios
-      .post("http://192.168.164.49:8000/pictures/", formDataNew)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+    // axios
+    //   .post("http://192.168.164.49:8000/pictures/", formDataNew)
+    //   .then((res) => console.log(res))
+    //   .catch((err) => console.log(err));
 
     console.log(image);
 
