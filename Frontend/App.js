@@ -13,6 +13,7 @@ import ClassCreated from "./components/classComponents/ClassCreated";
 import ClassJoined from "./components/classComponents/ClassJoined";
 import AttendanceCreate from "./components/attendanceComponents/AttendanceCreate";
 import AttendanceJoin from "./components/attendanceComponents/AttendanceJoin";
+import ForgotPassModal from "./models/ForgotPassModal";
 
 // View -> UI View(IOS), AndroidView(Android)
 const Stack = createNativeStackNavigator();
@@ -81,6 +82,7 @@ function App() {
           <Stack.Screen name="AttendanceCreate" component={AttendanceCreate} />
           <Stack.Screen name="AttendanceJoin" component={AttendanceJoin} />
           <Stack.Screen name="Create/Join Class" component={ClassModal} />
+          {/* <Stack.Screen name="Forgot" component={ForgotPassModal} /> */}
           <Stack.Screen
             name="Class"
             component={Class}

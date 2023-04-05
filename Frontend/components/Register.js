@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, Image, TextInput, Alert } from "react-native";
 import PressButton from "../models/PressButton";
 import { inputUserData } from "../util/http";
 import { fetchUserData } from "../util/http";
+import { Base64 } from "js-base64";
 import LottieView from "lottie-react-native";
 
 export default function Register({ navigation }) {
@@ -56,7 +57,7 @@ export default function Register({ navigation }) {
     //   roll_no: inputValues.rollno,
     // };
 
-    // fetch("http://192.168.164.49:8000/students/", {
+    // fetch("http://127.0.0.1:8000/students/", {
     //   method: "POST",
     //   headers: {
     //     "Content-Type": "application/json",
@@ -91,10 +92,12 @@ export default function Register({ navigation }) {
       inputValues.password === inputValues.cpassword &&
       inputValues.password !== ""
     ) {
+      formData.password = Base64.encode(inputValues.password);
+      formData.cpassword = Base64.encode(inputValues.cpassword);
       inputUserData(formData);
+      resetChangeHandler();
       Alert.alert("Registration Successfull !!!", "Make sure to login");
       navigation.navigate("Login");
-      resetChangeHandler();
     }
   }
 
@@ -124,7 +127,7 @@ export default function Register({ navigation }) {
         <View style={styles.inputView}>
           <TextInput
             style={styles.TextInput}
-            placeholder="Roll No."
+            placeholder="Roll No. / Id no."
             placeholderTextColor="#003f5c"
             onChangeText={inputChangeHandler.bind(this, "rollno")}
             value={inputValues.rollno}

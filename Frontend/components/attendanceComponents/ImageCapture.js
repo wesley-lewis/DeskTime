@@ -40,12 +40,12 @@ export default function ImageCapture() {
       quality: 0.5,
     });
 
-    // const formDataNew = {
-    //   image: image,
-    // };
+    const formDataNew = {
+      image: image,
+    };
 
     // axios
-    //   .post("http://192.168.164.49:8000/pictures/", formDataNew)
+    //   .post("http://192.168.144.49:8000/pictures/", formDataNew)
     //   .then((res) => console.log(res))
     //   .catch((err) => console.log(err));
 

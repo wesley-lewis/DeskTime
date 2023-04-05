@@ -153,3 +153,17 @@ export function deleteTopLoginIds(id) {
 }
 
 /***************************************************************/
+/***************************************************************/
+// FORGOT PASSWORD
+
+export function inputNewPassword(userId, userData) {
+  axios
+    .put(
+      `https://react-native-ababa-default-rtdb.firebaseio.com/users/${userId}.json`,
+      userData
+    )
+    .then((res) => {
+      console.log(res.data);
+    })
+    .catch((error) => console.log(error));
+}

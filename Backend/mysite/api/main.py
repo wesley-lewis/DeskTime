@@ -1,7 +1,7 @@
 import numpy as np
 import cv2
-path = "C://Users//vailantan fernandes//PycharmProjects//Face_detection//DeskTime//Backend//mysite//api//output//"
-net = cv2.dnn.readNetFromCaffe("C:\\Users\\vailantan fernandes\\PycharmProjects\\Face_detection\\DeskTime\\Backend\\mysite\\api\\prototext" , "C:\\Users\\vailantan fernandes\\PycharmProjects\\Face_detection\\DeskTime\\Backend\\mysite\\api\\res10_300x300_ssd_iter_140000.caffemodel")
+path = "C://Users//ameyb//Documents//React Native//DeskTime//Backend//mysite//api//output"
+net = cv2.dnn.readNetFromCaffe("C:\\Users\\ameyb\\Documents\\React Native\\DeskTime\\Backend\\mysite\\api\\prototext" , "C:\\Users\\ameyb\\Documents\\React Native\\DeskTime\\Backend\\mysite\\api\\res10_300x300_ssd_iter_140000.caffemodel")
 cv2.namedWindow("Output", cv2.WINDOW_NORMAL)
 
 
@@ -45,6 +45,4 @@ def faceDetection(imgPath):
 
     cv2.imshow("Output",image)
     cv2.waitKey(0)
-
-faceDetection("C://Users//vailantan fernandes//PycharmProjects//Face_detection//images//class.jpg")
 

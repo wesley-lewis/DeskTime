@@ -1,27 +1,19 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import PressButton from "../models/PressButton";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TextInput,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, Text, View, TextInput } from "react-native";
 import { useEffect } from "react";
 import { fetchUserData, inputLoginData } from "../util/http";
 import { Alert } from "react-native";
 import LottieView from "lottie-react-native";
 import { date } from "../util/date";
+import ForgotPassModal from "../models/ForgotPassModal";
+import { Base64 } from "js-base64";
 
 export default function Login({ navigation }) {
   // fetching data from firebase database user collections
   const [fetchedUserData, setFetchedUserData] = useState([]);
 
-  const loginAnimation = (
-    <LottieView autoPlay loop source={require("../animations/login.json")} />
-  );
   useEffect(() => {
     // setting fetchedUserData
     async function getUserData() {
@@ -64,7 +56,7 @@ export default function Login({ navigation }) {
 
     let result = fetchedUserData.find((indData) => {
       return indData.email === formData.email &&
-        indData.password === formData.password
+        Base64.decode(indData.password) === formData.password
         ? true
         : false;
     });
@@ -77,15 +69,15 @@ export default function Login({ navigation }) {
     } else if (result) {
       console.log(formData);
       inputLoginData(loginData);
+      resetChangeHandler();
       Alert.alert("Login Successfull !!!", "You can create or join the class");
       navigation.navigate("Class", formData);
-      resetChangeHandler();
     }
   }
 
   return (
     <>
-      <View style={{ flex: 1.5 }}>
+      <View style={{ flex: 1 }}>
         <LottieView
           autoPlay
           loop
@@ -113,12 +105,12 @@ export default function Login({ navigation }) {
             onChangeText={inputChangeHandler.bind(this, "password")}
           />
         </View>
-
-        <TouchableOpacity>
-          <Text style={styles.forgot_button}>Forgot Password?</Text>
-        </TouchableOpacity>
-
-        <PressButton onPress={submitHandler}>LOGIN</PressButton>
+        <View>
+          <PressButton onPress={submitHandler}>LOGIN</PressButton>
+          <Text>
+            <ForgotPassModal>Forgot Password?</ForgotPassModal>
+          </Text>
+        </View>
       </View>
     </>
   );
@@ -144,7 +136,6 @@ const styles = StyleSheet.create({
     width: "70%",
     height: 45,
     marginBottom: 20,
-
     alignItems: "center",
   },
 

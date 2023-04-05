@@ -34,7 +34,7 @@ def pictureDetails(request):
         serializer = PictureSerializer(data=request.POST, files=request.FILES)
         if serializer.is_valid():
             serializer.save()
-            faceDetection("C:\\Users\\vailantan fernandes\\PycharmProjects\\Face_detection\\DeskTime\\Backend\\mysite\\media\\class_photo\\class.jpg")
+            faceDetection("C:\\Users\\ameyb\\Documents\\React Native\\DeskTime\\Backend\\mysite\\media\\class_photo\\class.jpg")
             return HttpResponse("image uploaded")
         else:
             print(serializer.errors)
