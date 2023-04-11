@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "corsheaders",
     "classroom",
-
+    "cnnmodel",
 ]
 
 MIDDLEWARE = [
@@ -127,7 +127,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = "static/"
-
+DATA_UPLOAD_MAX_MEMORY_SIZE = 100000000
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
