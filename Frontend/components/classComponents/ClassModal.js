@@ -28,11 +28,6 @@ export default function ClassModal({ route, navigation }) {
   // closing and opening modal
   const [modalVisible, setModalVisible] = useState(false);
 
-  // for confirming class creation
-  const [confirmSubjectCreated, setConfirmSubjectCreated] = useState(false);
-  // for confirming joining class
-  const [confirmClassJoined, setConfirmClassJoined] = useState(false);
-
   // state for fetching Class data
   const [fetchedCreateClassData, setFetchedCreateClassData] = useState([]);
   // state for fetching joined class data
@@ -115,18 +110,17 @@ export default function ClassModal({ route, navigation }) {
         );
       });
 
-      if (result === undefined) {
-        setConfirmSubjectCreated(true);
-      } else {
-        setConfirmSubjectCreated(false);
-      }
-
-      if (!confirmSubjectCreated) {
+      if (
+        createInputValues.class.trim() === "" ||
+        createInputValues.subject.trim() === ""
+      ) {
+        Alert.alert("Please fill the required given fields");
+      } else if (result !== undefined) {
         Alert.alert(
           "Class of same Subject name already exists !",
           "Please give different subject name "
         );
-      } else if (confirmSubjectCreated) {
+      } else if (result === undefined) {
         inputCreateClassData(createClassData);
         Alert.alert(
           "Class Created Successfully !!",
@@ -154,13 +148,11 @@ export default function ClassModal({ route, navigation }) {
           "Class does not exists !!",
           "Make sure you have entered the right code"
         );
-        setConfirmClassJoined(false);
       } else if (globalEmail === codeObj.userEmail) {
         Alert.alert(
           "Class created from this account !!",
           "Cannot join your own class"
         );
-        setConfirmClassJoined(false);
       } else if (codeObjJoin === undefined) {
         const joinClassData = {
           joinEmail: globalEmail,
@@ -170,14 +162,12 @@ export default function ClassModal({ route, navigation }) {
           code: joinInputValues.code,
         };
         inputJoinClassData(joinClassData);
-        setConfirmClassJoined(true);
         navigation.navigate("ClassJoined");
       } else if (codeObjJoin.code === joinInputValues.code) {
         Alert.alert(
           "Class already joined !!",
           "Please check the joined class tab"
         );
-        setConfirmClassJoined(false);
       }
     }
   }

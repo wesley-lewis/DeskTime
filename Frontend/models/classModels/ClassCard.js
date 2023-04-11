@@ -1,10 +1,16 @@
-import { View, Text, StyleSheet, Dimensions, Pressable } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  Pressable,
+  Image,
+} from "react-native";
 import React from "react";
 
-import { useNavigation } from "@react-navigation/native";
+import LottieView from "lottie-react-native";
 
-import AppLoading from "expo-app-loading";
-import { useFonts, Inter_900Black } from "@expo-google-fonts/inter";
+import { useNavigation } from "@react-navigation/native";
 
 export default function ClassCard({ data }) {
   const navigation = useNavigation();
@@ -17,39 +23,49 @@ export default function ClassCard({ data }) {
       : navigation.navigate("AttendanceCreate", data.item);
   }
 
-  let [fontsLoaded] = useFonts({
-    Inter_900Black,
-  });
-
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  } else {
-    return (
-      <Pressable
-        onPress={pressHandler}
-        style={({ pressed }) => pressed && styles.pressed}
+  return (
+    <Pressable
+      onPress={pressHandler}
+      style={({ pressed }) => pressed && styles.pressed}
+    >
+      <View
+        style={[
+          styles.cardContainer,
+          { backgroundColor: `hsl(50 ,100%, 50%)` },
+        ]}
       >
-        <View
-          style={[
-            styles.cardContainer,
-            { backgroundColor: `hsl(50 ,100%, 50%)` },
-          ]}
-        >
+        <View style={{ flex: 1, marginBottom: 20 }}>
+          <View>
+            <Image
+              style={styles.imgCard}
+              source={require("../../assets/books.jpg")}
+            ></Image>
+            {/* <LottieView
+              style={{ width: 200 }}
+              autoPlay
+              loop
+              source={require("../../animations/subject.json")}
+            /> */}
+          </View>
+        </View>
+        <View style={{ flex: 2, marginTop: 100 }}>
           <Text style={[styles.txtStyle, { marginLeft: 10 }]}>
             {data.item.class}
           </Text>
-          <Text style={[styles.txtStyle, { textAlign: "center" }]}>
+          <Text
+            style={[styles.txtStyle, { textAlign: "center", marginTop: 18 }]}
+          >
             {data.item.subject}
           </Text>
-          <Text style={[styles.txtStyle, { marginLeft: 10 }]}>
+          <Text style={[styles.txtStyle, { marginLeft: 10, marginTop: 18 }]}>
             {data.item.createEmail === undefined
               ? data.item.code
               : data.item.createEmail}
           </Text>
         </View>
-      </Pressable>
-    );
-  }
+      </View>
+    </Pressable>
+  );
 }
 
 const widthDevice = Math.round(Dimensions.get("window").width);
@@ -60,8 +76,8 @@ const styles = StyleSheet.create({
     marginVertical: 18,
     width: widthDevice - 25,
     marginLeft: 10,
-    height: 250,
-    borderBottomEndRadius: 20,
+    height: 300,
+    borderBottomLeftRadius: 20,
     borderTopRightRadius: 20,
     shadowColor: "black",
     shadowOffset: {
@@ -72,10 +88,13 @@ const styles = StyleSheet.create({
     elevation: 9,
     shadowRadius: 5,
   },
+  imgCard: {
+    width: 368,
+    height: 169,
+    borderTopRightRadius: 20,
+  },
   txtStyle: {
     fontWeight: "bold",
     fontSize: 20,
-    fontFamily: "Inter_900Black",
-    // fontFamily: "Pixel",
   },
 });

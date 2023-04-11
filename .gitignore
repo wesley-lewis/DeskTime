@@ -3,3 +3,9 @@ images_data/
 predict/
 model/
 unused/
+node_modules/
+mysite/classroom/__pycache__/views.cpython-39.pyc
+mysite/mysite/__pycache__/settings.cpython-39.pyc
+mysite/classroom/__pycache__/urls.cpython-39.pyc
+wesley.mp4
+
